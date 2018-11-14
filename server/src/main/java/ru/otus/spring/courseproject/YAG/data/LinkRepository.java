@@ -1,4 +1,11 @@
 package ru.otus.spring.courseproject.YAG.data;
 
-public interface LinkRepository {
+import org.springframework.data.repository.CrudRepository;
+import ru.otus.spring.courseproject.YAG.domain.Link;
+
+import java.util.List;
+
+public interface LinkRepository extends CrudRepository<Link, Long> {
+
+    List<Link> findAll();
 }
