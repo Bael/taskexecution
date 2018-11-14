@@ -4,6 +4,7 @@ import lombok.Data;
 
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 public class Link {
 
     @Id
+    @GeneratedValue
     private long id;
 
     @ManyToOne

@@ -7,6 +7,7 @@ import ru.otus.spring.courseproject.YAG.data.TaskRepository;
 import ru.otus.spring.courseproject.YAG.domain.Link;
 import ru.otus.spring.courseproject.YAG.dto.LinkDTO;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,7 @@ public class LinkController {
     }
 
     @PostMapping("/api/links")
+    @Transactional
     public LinkDTO createLink(@RequestBody LinkDTO dto) {
         Link link = new Link();
         link.setTarget(taskRepository.findById(dto.getTarget()).orElseThrow(RuntimeException::new));
@@ -34,6 +36,7 @@ public class LinkController {
     }
 
     @PutMapping("/api/links/{id}")
+    @Transactional
     public LinkDTO updateLink(@PathVariable int id, @RequestBody LinkDTO dto) {
         Link link = linkRepository.findById((long) id).orElseThrow(RuntimeException::new);
 
@@ -46,6 +49,7 @@ public class LinkController {
 
 
     @DeleteMapping("/api/links/{id}")
+    @Transactional
     public void deleteTask(@PathVariable int id) {
         linkRepository.deleteById((long) id);
     }
