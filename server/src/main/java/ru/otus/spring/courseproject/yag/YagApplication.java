@@ -1,19 +1,22 @@
-package ru.otus.spring.courseproject.YAG;
+package ru.otus.spring.courseproject.yag;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.otus.spring.courseproject.YAG.data.LinkRepository;
-import ru.otus.spring.courseproject.YAG.data.TaskRepository;
-import ru.otus.spring.courseproject.YAG.domain.Link;
-import ru.otus.spring.courseproject.YAG.domain.Task;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import ru.otus.spring.courseproject.yag.data.LinkRepository;
+import ru.otus.spring.courseproject.yag.data.ProjectRepository;
+import ru.otus.spring.courseproject.yag.data.TaskRepository;
+import ru.otus.spring.courseproject.yag.domain.Link;
+import ru.otus.spring.courseproject.yag.domain.Project;
+import ru.otus.spring.courseproject.yag.domain.Task;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @SpringBootApplication
+@EnableJpaRepositories
 public class YagApplication {
 
 	public static void main(String[] args) {
@@ -26,11 +29,15 @@ public class YagApplication {
 	@Autowired
 	LinkRepository linkRepository;
 
+	@Autowired
+	ProjectRepository projectRepository;
+
 	@PostConstruct
 	public void init () {
 
 		linkRepository.deleteAll();
 		taskRepository.deleteAll();
+		projectRepository.deleteAll();
 
 		Task first = new Task();
 		first.setDescription("Task one");
@@ -53,6 +60,13 @@ public class YagApplication {
 		link.setTarget(second);
 		link.setType("0");
 		linkRepository.save(link);
+
+		Project project = new Project();
+		project.setName("my homework");
+		project.setDescription("do something already");
+		projectRepository.save(project);
+
+
 
 		//   {id: 1, text: 'Task #1', start_date: '2017-04-15 00:00', duration: 3, progress: 0.6},
 		//   {id: 2, text: 'Task #2', start_date: '2017-04-18 00:00', duration: 3, progress: 0.4}

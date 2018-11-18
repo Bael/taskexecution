@@ -10,6 +10,12 @@ buildscript {
 	}
 }
 
+plugins {
+	id 'net.ltgt.apt' version '0.10'
+
+}
+
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -25,8 +31,14 @@ repositories {
 
 
 dependencies {
+
 	implementation('org.springframework.boot:spring-boot-starter-actuator')
 	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
 	implementation('org.springframework.boot:spring-boot-starter-web')
-	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	implementation('org.projectlombok:lombok:1.18.4')
+	apt 'org.projectlombok:lombok:1.18.4'
+    runtime('com.h2database:h2')
+
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
 }

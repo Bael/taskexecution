@@ -1,11 +1,11 @@
-package ru.otus.spring.courseproject.YAG.dto;
+package ru.otus.spring.courseproject.yag.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.otus.spring.courseproject.YAG.domain.Task;
+import ru.otus.spring.courseproject.yag.domain.Task;
 
 import java.time.format.DateTimeFormatter;
 

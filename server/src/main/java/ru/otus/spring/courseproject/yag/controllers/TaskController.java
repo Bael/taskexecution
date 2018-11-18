@@ -1,16 +1,14 @@
-package ru.otus.spring.courseproject.YAG.controllers;
+package ru.otus.spring.courseproject.yag.controllers;
 
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.otus.spring.courseproject.YAG.data.TaskRepository;
-import ru.otus.spring.courseproject.YAG.domain.Task;
-import ru.otus.spring.courseproject.YAG.dto.LinkDTO;
-import ru.otus.spring.courseproject.YAG.dto.TaskDTO;
+import ru.otus.spring.courseproject.yag.data.TaskRepository;
+import ru.otus.spring.courseproject.yag.domain.Task;
+import ru.otus.spring.courseproject.yag.dto.TaskDTO;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 

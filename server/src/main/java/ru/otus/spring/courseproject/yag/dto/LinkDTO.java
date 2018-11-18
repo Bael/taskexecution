@@ -1,14 +1,11 @@
-package ru.otus.spring.courseproject.YAG.dto;
+package ru.otus.spring.courseproject.yag.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import ru.otus.spring.courseproject.YAG.domain.Link;
-import ru.otus.spring.courseproject.YAG.domain.Task;
+import ru.otus.spring.courseproject.yag.domain.Link;
 
-import javax.persistence.ManyToOne;
 import java.util.Objects;
 
 @Data

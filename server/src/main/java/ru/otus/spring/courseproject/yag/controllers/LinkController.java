@@ -1,11 +1,11 @@
-package ru.otus.spring.courseproject.YAG.controllers;
+package ru.otus.spring.courseproject.yag.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.otus.spring.courseproject.YAG.data.LinkRepository;
-import ru.otus.spring.courseproject.YAG.data.TaskRepository;
-import ru.otus.spring.courseproject.YAG.domain.Link;
-import ru.otus.spring.courseproject.YAG.dto.LinkDTO;
+import ru.otus.spring.courseproject.yag.data.LinkRepository;
+import ru.otus.spring.courseproject.yag.data.TaskRepository;
+import ru.otus.spring.courseproject.yag.domain.Link;
+import ru.otus.spring.courseproject.yag.dto.LinkDTO;
 
 import javax.transaction.Transactional;
 import java.util.List;

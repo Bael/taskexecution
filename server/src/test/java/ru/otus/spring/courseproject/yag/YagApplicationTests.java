@@ -1,4 +1,4 @@
-package ru.otus.spring.courseproject.YAG;
+package ru.otus.spring.courseproject.yag;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

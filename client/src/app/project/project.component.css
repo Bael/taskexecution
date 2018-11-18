@@ -1,0 +1,11 @@
+mat-form-field {
+  width: 40vw;
+}
+
+div {
+  height: 100vh;
+}
+:host {
+  width: 50vw;
+  height: 100vh;
+}

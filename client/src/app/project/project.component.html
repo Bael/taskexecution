@@ -1,0 +1,33 @@
+<h2>Project page:</h2>
+
+<mat-tab-group>
+  <mat-tab label="Main info">
+    <div>
+      <label matInput [title]="project.status">Project status: {{project.status}}</label>
+      <p>Enter project name:</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="project.name">
+      </mat-form-field>
+
+      <p>Enter project description:</p>
+      <mat-form-field>
+        <textarea matInput [(ngModel)]="project.description"></textarea>
+      </mat-form-field>
+      <br>
+      <button mat-raised-button (click)="onSaveChanges()">Save changes</button>
+    </div>
+  </mat-tab>
+  <mat-tab label="Operations">
+    <button mat-raised-button  (click)="onArchiveProject()"> Archive project</button>
+  </mat-tab>
+  <mat-tab label="User Access">
+    <mat-selection-list #usersOfProjects>
+      <mat-list-option *ngFor="let user of users">
+        {{user.name}}
+      </mat-list-option>
+    </mat-selection-list>
+    <button mat-raised-button  (click)="onSaveAccess()"> Save Access</button>
+  </mat-tab>
+</mat-tab-group>
+
+

@@ -1,8 +1,19 @@
 <mat-sidenav-container class="example-container" >
   <mat-sidenav #sidenav mode="side">
 
-    <a href="#" [routerLink]="['gantt']" >  gantt</a>
-    <a href="#" [routerLink]="['projects']" >projects</a>
+    <mat-list>
+      <mat-list-item>
+        <a href="#" [routerLink]="['gantt']" >  gantt</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a href="#" [routerLink]="['projects']" >projects</a>
+      </mat-list-item>
+      <mat-list-item>
+        <a href="#" [routerLink]="['users']" >users</a>
+      </mat-list-item>
+    </mat-list>
+
+
 
   </mat-sidenav>
 

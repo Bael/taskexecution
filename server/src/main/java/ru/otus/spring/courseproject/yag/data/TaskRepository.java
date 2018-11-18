@@ -1,7 +1,7 @@
-package ru.otus.spring.courseproject.YAG.data;
+package ru.otus.spring.courseproject.yag.data;
 
 import org.springframework.data.repository.CrudRepository;
-import ru.otus.spring.courseproject.YAG.domain.Task;
+import ru.otus.spring.courseproject.yag.domain.Task;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package ru.otus.spring.courseproject.YAG.domain;
+package ru.otus.spring.courseproject.yag.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
