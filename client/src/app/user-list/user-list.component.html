@@ -1,0 +1,39 @@
+<button mat-raised-button (click)="onClickCreateNewUser()">Create new user..</button>
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id.</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}}</mat-cell>
+    </ng-container>
+
+    <!-- Login Column -->
+    <ng-container matColumnDef="login">
+      <mat-header-cell *matHeaderCellDef> Login</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.login}}</mat-cell>
+    </ng-container>
+
+    <!-- Fio Column -->
+    <ng-container matColumnDef="fio">
+      <mat-header-cell *matHeaderCellDef> Fio</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.fio}}</mat-cell>
+    </ng-container>
+
+    <!-- Edit Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef> edit</mat-header-cell>
+      <mat-cell *matCellDef="let element"><a href="#" [routerLink]="['/users', element.id]">
+        Go to {{element.login}} page</a></mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

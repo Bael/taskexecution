@@ -19,12 +19,14 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import { NavProjectComponent } from './nav-project/nav-project.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ProjectListComponent, CreateProjectDialogComponent } from './project-list/project-list.component';
-import { UsersListComponent } from './users-list/users-list.component';
+
 import {ProjectService} from './project.service';
 import {TaskService} from './task.service';
 import {LinkService} from './link.service';
 import { ProjectComponent } from './project/project.component';
 import {FormsModule} from '@angular/forms';
+import {UserService} from './user.service';
+import { UserListComponent, CreateUserDialogComponent } from './user-list/user-list.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -32,7 +34,7 @@ const appRoutes: Routes = [
   {path: 'gantt/:id', component: GanttComponent },
   {path: 'projects', component: ProjectListComponent },
   {path: 'projects/:id', component: ProjectComponent },
-  {path: 'users', component: UsersListComponent },
+  {path: 'users', component: UserListComponent },
   {path: '**', component: PageNotFoundComponent}
 ];
 
@@ -44,11 +46,13 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     NavProjectComponent,
     ProjectListComponent,
-    UsersListComponent,
+    UserListComponent,
     ProjectComponent,
-    CreateProjectDialogComponent
+    CreateProjectDialogComponent,
+    UserListComponent,
+    CreateUserDialogComponent
   ],
-  entryComponents: [CreateProjectDialogComponent],
+  entryComponents: [CreateProjectDialogComponent, CreateUserDialogComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes, {enableTracing: true}
@@ -69,7 +73,7 @@ const appRoutes: Routes = [
     MatTabsModule
 
   ],
-  providers: [ProjectService, TaskService, LinkService],
+  providers: [ProjectService, TaskService, LinkService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

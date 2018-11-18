@@ -3,5 +3,6 @@ export class User {
   login: string;
   fio: string;
   avatarUrl?: string;
+  password: string;
 
 }

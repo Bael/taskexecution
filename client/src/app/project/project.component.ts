@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Project} from '../project';
 import {ProjectService} from '../project.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {User} from '../user';
+import {UserService} from '../user.service';
+import {MatListOption} from '@angular/material';
 
 @Component({
   selector: 'app-project',
@@ -15,7 +18,8 @@ export class ProjectComponent implements OnInit {
 
   constructor(private projectService: ProjectService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private userService: UserService) {
   }
 
   ngOnInit() {
@@ -23,6 +27,8 @@ export class ProjectComponent implements OnInit {
         this.projectService.getProject(value.get('id'))
           .then(project => this.project = project),
       error1 => alert(error1));
+
+    this.userService.getUsers().then(value => this.users = value);
 
   }
 
@@ -45,7 +51,12 @@ export class ProjectComponent implements OnInit {
         error1 => alert(error1));
   }
 
-  onSaveAccess() {
+
+  onSaveAccess(selected: MatListOption[]) {
+    const selectedUserIds: number[] = [];
+    selected.map(value => value.value)
+      .reduce((previousValue, currentValue) => previousValue.push(currentValue), selectedUserIds);
+    this.projectService.grantAccessToUsers(selectedUserIds)
 
   }
 }

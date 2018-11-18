@@ -22,11 +22,15 @@
   </mat-tab>
   <mat-tab label="User Access">
     <mat-selection-list #usersOfProjects>
-      <mat-list-option *ngFor="let user of users">
-        {{user.name}}
+      <mat-list-option *ngFor="let user of users" [value]="user.id">
+        <img matListAvatar [src]="user.avatarUrl" [alt]="user.fio">
+        <h3 matLine> {{user.login}} </h3>
+        <p matLine>
+          <span> {{user.fio}} </span>
+        </p>
       </mat-list-option>
     </mat-selection-list>
-    <button mat-raised-button  (click)="onSaveAccess()"> Save Access</button>
+    <button mat-raised-button  (click)="onSaveAccess(usersOfProjects.selectedOptions.selected)"> Save Access</button>
   </mat-tab>
 </mat-tab-group>
 

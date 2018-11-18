@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Settings} from './settings';
 import {Project} from './project';
 import {Observable} from 'rxjs/Observable';
+import {User} from './user';
 
 
 @Injectable()
@@ -33,5 +34,9 @@ export class ProjectService {
 
   archiveProject(project: Project): Promise<Project> {
     return this.httpService.put<Project>(Settings.baseUrl + 'projects/archive/' + project.id, project).toPromise();
+  }
+
+  grantAccessToUsers(selectedUserIds: number[]): Promise<void> {
+    return this.httpService.post<void>(Settings.baseUrl + 'projects/access/', selectedUserIds).toPromise();
   }
 }

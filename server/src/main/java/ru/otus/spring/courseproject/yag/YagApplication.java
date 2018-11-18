@@ -7,9 +7,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import ru.otus.spring.courseproject.yag.data.LinkRepository;
 import ru.otus.spring.courseproject.yag.data.ProjectRepository;
 import ru.otus.spring.courseproject.yag.data.TaskRepository;
+import ru.otus.spring.courseproject.yag.data.UserRepository;
 import ru.otus.spring.courseproject.yag.domain.Link;
 import ru.otus.spring.courseproject.yag.domain.Project;
 import ru.otus.spring.courseproject.yag.domain.Task;
+import ru.otus.spring.courseproject.yag.domain.User;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDate;
@@ -32,12 +34,32 @@ public class YagApplication {
 	@Autowired
 	ProjectRepository projectRepository;
 
+	@Autowired
+	UserRepository userRepository;
+
+
 	@PostConstruct
 	public void init () {
+
 
 		linkRepository.deleteAll();
 		taskRepository.deleteAll();
 		projectRepository.deleteAll();
+		userRepository.deleteAll();
+
+		User user = new User();
+		user.setFio("Васнецов И.В.");
+		user.setLogin("vasya");
+		user.setAvatarUrl("");
+		userRepository.save(user);
+
+		User user2 = new User();
+		user2.setFio("Петров А.Н.");
+		user2.setLogin("peter");
+		user2.setAvatarUrl("");
+		userRepository.save(user2);
+
+
 
 		Task first = new Task();
 		first.setDescription("Task one");
