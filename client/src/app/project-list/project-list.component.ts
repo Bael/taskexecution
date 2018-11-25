@@ -2,6 +2,8 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Project} from '../project';
 import {ProjectService} from '../project.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource} from '@angular/material';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {User} from '../user';
 
 
 
@@ -25,12 +27,17 @@ export class ProjectListComponent implements OnInit {
   constructor(private projectService: ProjectService, public dialog: MatDialog) { }
 
   ngOnInit() {
+
+    this.getProjects();
+      // .then(value => this.projects = value);
+      // .catch(reason => alert(reason));
+  }
+
+  getProjects() {
     this.projectService.getProjects().subscribe(value => {
       this.dataSource.data = value;
       this.projects = value;
     });
-      // .then(value => this.projects = value);
-      // .catch(reason => alert(reason));
   }
 
   onClickCreateNewProject(): void {
@@ -42,9 +49,13 @@ export class ProjectListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed with result ' + result);
       this.projectService.createProject(result)
-        .then(project => this.projects.push(project));
+        .then(project => {
+          this.projects.push(project);
+          this.getProjects();
+        } );
 
     });
+
   }
 
 

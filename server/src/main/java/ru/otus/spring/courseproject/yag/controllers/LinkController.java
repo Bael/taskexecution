@@ -3,8 +3,10 @@ package ru.otus.spring.courseproject.yag.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.otus.spring.courseproject.yag.data.LinkRepository;
+import ru.otus.spring.courseproject.yag.data.ProjectRepository;
 import ru.otus.spring.courseproject.yag.data.TaskRepository;
 import ru.otus.spring.courseproject.yag.domain.Link;
+import ru.otus.spring.courseproject.yag.domain.Project;
 import ru.otus.spring.courseproject.yag.dto.LinkDTO;
 
 import javax.transaction.Transactional;
@@ -19,10 +21,23 @@ public class LinkController {
     @Autowired
     TaskRepository taskRepository;
 
+    @Autowired
+    ProjectRepository projectRepository;
+
     @GetMapping("/api/links")
     public List<LinkDTO> getLinks() {
         return linkRepository.findAll().stream().map(LinkDTO::fromLink).collect(Collectors.toList());
     }
+
+    @GetMapping("/api/projects/{id}/links")
+    public List<LinkDTO> getByProject(@PathVariable long id) {
+
+        Project p = projectRepository.findById(id).orElseThrow(RuntimeException::new);
+        return linkRepository.findByProject(p).stream().map(LinkDTO::fromLink).collect(Collectors.toList());
+    }
+
+
+
 
     @PostMapping("/api/links")
     @Transactional
@@ -31,6 +46,10 @@ public class LinkController {
         link.setTarget(taskRepository.findById(dto.getTarget()).orElseThrow(RuntimeException::new));
         link.setSource(taskRepository.findById(dto.getSource()).orElseThrow(RuntimeException::new));
         link.setType(dto.getType());
+
+        Project p = projectRepository.findById(dto.getProject()).orElseThrow(RuntimeException::new);
+
+        link.setProject(p);
         linkRepository.save(link);
         return LinkDTO.fromLink(link);
     }

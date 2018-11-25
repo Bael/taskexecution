@@ -18,7 +18,14 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <p><button mat-button (click)="sidenav.toggle()">sidenav.toggle()</button></p>
+    <div>
+      <button mat-icon-button (click)="sidenav.toggle()" title="Toggle sidebar" >
+
+        <mat-icon> more-vert</mat-icon>
+      </button>
+      <h1>Task management on Gantt projects</h1>
+    </div>
+
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

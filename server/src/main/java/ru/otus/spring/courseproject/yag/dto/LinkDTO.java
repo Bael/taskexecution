@@ -18,6 +18,7 @@ public class LinkDTO {
     private Long source;
     private Long target;
     private String type;
+    private Long project;
 
     public static LinkDTO fromLink(Link link) {
 
@@ -27,6 +28,7 @@ public class LinkDTO {
         return LinkDTO.builder().id(link.getId())
                 .source(link.getSource().getId())
                 .target(link.getTarget().getId())
+                .project(link.getProject().getId())
                 .type(link.getType()).build();
 
     }

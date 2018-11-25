@@ -16,6 +16,10 @@ public class Link {
     @GeneratedValue
     private long id;
 
+
+    @ManyToOne
+    private Project project;
+
     @ManyToOne
     private Task source;
 

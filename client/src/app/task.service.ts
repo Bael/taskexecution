@@ -22,6 +22,12 @@ export class TaskService {
     // ]);
   }
 
+  getByProject(id: number): Promise<Task[]> {
+
+    return this.http.get<Task[]>(Settings.baseUrl + 'projects/' + id + '/tasks').toPromise();
+
+  }
+
   insert(task: Task): Promise<Task> {
     return this.http.post<Task>(this.taskUrl, task).toPromise();
   }

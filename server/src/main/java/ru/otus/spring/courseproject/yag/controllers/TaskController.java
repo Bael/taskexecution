@@ -3,8 +3,11 @@ package ru.otus.spring.courseproject.yag.controllers;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.otus.spring.courseproject.yag.data.ProjectRepository;
 import ru.otus.spring.courseproject.yag.data.TaskRepository;
+import ru.otus.spring.courseproject.yag.domain.Project;
 import ru.otus.spring.courseproject.yag.domain.Task;
+import ru.otus.spring.courseproject.yag.dto.LinkDTO;
 import ru.otus.spring.courseproject.yag.dto.TaskDTO;
 
 import javax.transaction.Transactional;
@@ -18,9 +21,19 @@ public class TaskController {
     @Autowired
     TaskRepository taskRepository;
 
+    @Autowired
+    ProjectRepository projectRepository;
+
+
     @GetMapping("/api/tasks")
     public List<TaskDTO> getTasks() {
         return taskRepository.findAll().stream().map(TaskDTO::fromTask).collect(Collectors.toList());
+    }
+
+    @GetMapping("/api/projects/{id}/tasks")
+    public List<TaskDTO> getByProject(@PathVariable long id) {
+        Project p = projectRepository.findById(id).orElseThrow(RuntimeException::new);
+        return taskRepository.findByProject(p).stream().map(TaskDTO::fromTask).collect(Collectors.toList());
     }
 
     @PostMapping("/api/tasks")
@@ -31,6 +44,8 @@ public class TaskController {
         task.setDescription(taskDTO.getDescription());
         task.setDuration(taskDTO.getDuration());
 
+        Project p = projectRepository.findById(taskDTO.getProject()).orElseThrow(RuntimeException::new);
+        task.setProject(p);
 //        task.setStartDate(LocalDate.now(ZoneId.of("UTC")));
         // 2018-01-31
         LocalDate startDate = LocalDate.parse(taskDTO.getStartDate().substring(0, 10));

@@ -15,4 +15,8 @@ export class UserService {
   createUser(user: User): Promise<User> {
     return this.httpService.post<User>(Settings.baseUrl + 'users', user).toPromise();
   }
+
+  updateUser(user: User): Promise<User> {
+    return this.httpService.put<User>(Settings.baseUrl + 'users/' + user.id, user).toPromise();
+  }
 }

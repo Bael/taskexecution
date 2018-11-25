@@ -23,6 +23,7 @@ public class TaskDTO {
     private double progress;
     private int duration;
     private Long parent;
+    private Long project;
     private String executor;
 
     public static TaskDTO fromTask(Task task) {
@@ -35,6 +36,10 @@ public class TaskDTO {
         }
         if (task.getStartDate() != null) {
             b.startDate(task.getStartDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd 00:00")));
+        }
+
+        if (task.getProject() != null) {
+            b.project(task.getProject().getId());
         }
 
         return b.build();

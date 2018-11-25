@@ -42,7 +42,8 @@
     <!-- Gantt Column -->
     <ng-container matColumnDef="gantt">
       <mat-header-cell *matHeaderCellDef> edit</mat-header-cell>
-      <mat-cell *matCellDef="let element"><a href="/gantt/{{element.id}}">Open gantt</a></mat-cell>
+      <!--<mat-cell *matCellDef="let element"><a href="/gantt/{{element.id}}">Open gantt</a></mat-cell>-->
+      <mat-cell *matCellDef="let element"><a href="#" [routerLink]="['/gantt', element.id]" >Open gantt</a></mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

@@ -23,6 +23,9 @@ public class Task {
     private int duration;
 
     @ManyToOne
+    private Project project;
+
+    @ManyToOne
     private Task parent;
 
 }

@@ -15,9 +15,10 @@ export class LinkService {
 
     return this.http.get<Link[]>(Settings.baseUrl + 'links').toPromise();
 
-    // return Promise.resolve([
-    //   {id: 1, source: 1, target: 2, type: '0'}
-    // ]);
+  }
+
+  getByProject(id: number): Promise<Link[]> {
+    return this.http.get<Link[]>(Settings.baseUrl + 'projects/' + id + '/links').toPromise();
   }
 
   insert(link: Link): Promise<Link> {
