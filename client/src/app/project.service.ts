@@ -39,4 +39,8 @@ export class ProjectService {
   grantAccessToUsers(selectedUserIds: number[]): Promise<void> {
     return this.httpService.post<void>(Settings.baseUrl + 'projects/access/', selectedUserIds).toPromise();
   }
+
+  sendTasksToExecution(project: Project): Promise<void> {
+    return this.httpService.post<void>(Settings.baseUrl + 'projects/send/' + project.id, project).toPromise();
+  }
 }

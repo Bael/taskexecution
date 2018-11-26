@@ -6,6 +6,7 @@ import ru.otus.spring.courseproject.yag.data.ProjectRepository;
 import ru.otus.spring.courseproject.yag.domain.Project;
 import ru.otus.spring.courseproject.yag.domain.ProjectStatus;
 import ru.otus.spring.courseproject.yag.dto.ProjectDTO;
+import ru.otus.spring.courseproject.yag.messaging.TaskSender;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,6 +60,15 @@ public class ProjectController {
         project.setStatus(ProjectStatus.ARCHIVED);
         projectRepository.save(project);
 
+    }
+
+    @Autowired
+    TaskSender taskSender;
+
+    @PostMapping("api/projects/send/{id}")
+    public void sendProjectTasks(@PathVariable long id, @RequestBody ProjectDTO projectDTO) {
+        Project project = projectRepository.findById(id).orElseThrow(() -> new RuntimeException("not found"));
+        taskSender.sendTasks("jms-tasks-queue", project);
     }
 
     @DeleteMapping("api/projects/{id}")

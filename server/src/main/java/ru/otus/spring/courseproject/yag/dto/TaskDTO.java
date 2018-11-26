@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import ru.otus.spring.courseproject.yag.domain.Task;
 
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -45,5 +47,6 @@ public class TaskDTO {
         return b.build();
 
     }
+
 
 }

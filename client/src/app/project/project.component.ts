@@ -59,4 +59,13 @@ export class ProjectComponent implements OnInit {
     this.projectService.grantAccessToUsers(selectedUserIds)
 
   }
+
+  onSendProjectTasks() {
+    this.projectService.sendTasksToExecution(this.project)
+      .then(() => {
+          this.router.navigateByUrl('/projects');
+        }
+        ,
+        error1 => alert(error1));
+  }
 }

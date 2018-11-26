@@ -13,6 +13,17 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 public class Task {
+//    @Override
+//    public String toString() {
+//        return "Task{" +
+//                "id=" + id +
+//                ", startDate=" + startDate +
+//                ", description='" + description + '\'' +
+//                ", progress=" + progress +
+//                ", duration=" + duration +
+//                ", project=" + project +
+//                '}';
+//    }
 
     @Id
     @GeneratedValue
@@ -21,6 +32,7 @@ public class Task {
     private String description;
     private double progress;
     private int duration;
+    private boolean isSynced;
 
     @ManyToOne
     private Project project;
@@ -28,4 +40,7 @@ public class Task {
     @ManyToOne
     private Task parent;
 
+    public String toString() {
+        return "Task(id=" + this.getId() + ", startDate=" + this.getStartDate() + ", description=" + this.getDescription() + ", progress=" + this.getProgress() + ", duration=" + this.getDuration() + ", project=" + this.getProject() + ", parent=" + this.getParent() + ")";
+    }
 }
