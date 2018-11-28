@@ -1,0 +1,63 @@
+
+
+<!--<ol>-->
+  <!--<li *ngFor="let item of list">-->
+   <!--<a [routerLink]="['/backlog', item. id]">-->
+     <!--{{list | json}}-->
+   <!--</a>-->
+
+  <!--</li>-->
+<!--</ol>-->
+
+<!--<button >-->
+  <!---->
+<!--</button>-->
+
+
+<!--<p>-->
+<!--project-list works!-->
+<!--</p>-->
+<!--<ul>-->
+<!--<li *ngFor="let project of projects"> {{project?.name}}</li>-->
+<!--</ul>-->
+<button mat-raised-button (click)="onClickCreateNewItem()">Create new item..</button>
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> Id.</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}}</mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}}</mat-cell>
+    </ng-container>
+
+    <!-- Priority Column -->
+    <ng-container matColumnDef="priority">
+      <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.priority}}</mat-cell>
+    </ng-container>
+
+
+    <!-- goto to card Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>edit</mat-header-cell>
+      <mat-cell *matCellDef="let element"><a href="#" [routerLink]="['/backlog', element.id]" >Open card</a></mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+

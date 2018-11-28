@@ -1,5 +1,7 @@
 package ru.otus.spring.courseproject.yag.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +12,8 @@ import javax.persistence.Id;
 @Data
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
 
     @Id
@@ -19,5 +23,6 @@ public class User {
     private String login;
     private String password;
     private String avatarUrl;
+    private String role;
 
 }

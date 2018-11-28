@@ -12,7 +12,7 @@ import {
   MatFormFieldModule, MatIconModule,
   MatInputModule,
   MatListModule,
-  MatSidenavModule,
+  MatSidenavModule, MatSliderModule,
   MatTableModule,
   MatTabsModule
 } from '@angular/material';
@@ -29,11 +29,17 @@ import {ProjectComponent} from './project/project.component';
 import {FormsModule} from '@angular/forms';
 import {UserService} from './user.service';
 import {CreateUserDialogComponent, UserListComponent} from './user-list/user-list.component';
+import { BacklogItemListComponent } from './backlog-item-list/backlog-item-list.component';
+import { BacklogItemComponent } from './backlog-item/backlog-item.component';
+import { BacklogItemDialogComponent } from './backlog-item-dialog/backlog-item-dialog.component';
+import {BacklogItemService} from './backlog-item.service';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
 
   {path: 'home', component: ProjectListComponent},
+  {path: 'backlog', component: BacklogItemListComponent},
+  {path: 'backlog/:id', component: BacklogItemComponent},
   {path: 'gantt/:id', component: GanttComponent},
   {path: 'projects', component: ProjectListComponent},
   {path: 'projects/:id', component: ProjectComponent},
@@ -53,9 +59,12 @@ const appRoutes: Routes = [
     ProjectComponent,
     CreateProjectDialogComponent,
     UserListComponent,
-    CreateUserDialogComponent
+    CreateUserDialogComponent,
+    BacklogItemListComponent,
+    BacklogItemComponent,
+    BacklogItemDialogComponent
   ],
-  entryComponents: [CreateProjectDialogComponent, CreateUserDialogComponent],
+  entryComponents: [CreateProjectDialogComponent, CreateUserDialogComponent, BacklogItemDialogComponent],
   imports: [
     RouterModule.forRoot(
       appRoutes, {enableTracing: true}
@@ -74,10 +83,11 @@ const appRoutes: Routes = [
     MatInputModule,
     MatDialogModule,
     MatTabsModule,
-    MatIconModule
+    MatIconModule,
+    MatSliderModule
 
   ],
-  providers: [ProjectService, TaskService, LinkService, UserService],
+  providers: [ProjectService, TaskService, LinkService, UserService, BacklogItemService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

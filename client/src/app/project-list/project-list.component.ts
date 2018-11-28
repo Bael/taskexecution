@@ -2,8 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Project} from '../project';
 import {ProjectService} from '../project.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource} from '@angular/material';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {User} from '../user';
 
 
 

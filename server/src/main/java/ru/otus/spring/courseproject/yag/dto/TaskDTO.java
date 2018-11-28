@@ -24,7 +24,7 @@ public class TaskDTO {
     private String description;
     private double progress;
     private int duration;
-    private Long parent;
+    private long parent;
     private Long project;
     private String executor;
 

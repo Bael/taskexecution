@@ -1,0 +1,47 @@
+<p>
+  ID: {{item?.id}}
+</p>
+
+<p>Enter item name:</p>
+<mat-form-field>
+  <input matInput [(ngModel)]="item.name">
+</mat-form-field>
+
+<p>Change item priority (1-10):</p>
+<mat-slider  class="example-margin"
+  [max]="10"
+  [min]="0"
+  [step]="1"
+  [thumb-label]="true"
+  [tick-interval]="3"
+  [(ngModel)]="item.priority">
+</mat-slider>
+
+
+
+
+<form (submit)="addItem(textinput.value)">
+  <mat-form-field >
+    <input type="text" #textinput matInput  >
+  </mat-form-field>
+  <button type="submit" mat-raised-button
+
+  >Add</button>
+</form>
+<mat-list>
+  <mat-list-item *ngFor="let option of item.options" >
+    {{option}} </mat-list-item>
+</mat-list>
+
+<form (submit)="saveItem()">
+  <button mat-raised-button type="submit" >SAVE CHANGES</button>
+</form>
+
+
+<form (submit)="deleteItem()">
+  <button mat-raised-button type="submit" >DELETE</button>
+</form>
+
+<form (submit)="convertToProject()">
+  <button mat-raised-button type="submit" >TO PROJECT</button>
+</form>

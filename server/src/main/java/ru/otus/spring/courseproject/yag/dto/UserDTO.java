@@ -12,6 +12,7 @@ public class UserDTO {
     private String login;
     private String password;
     private String avatarUrl;
+    private String role;
 
     public static UserDTO fromUser(User user) {
         UserDTO userDTO = new UserDTO();

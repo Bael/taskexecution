@@ -50,6 +50,7 @@ public class YagApplication {
 		User user = new User();
 		user.setFio("Васнецов И.В.");
 		user.setLogin("vasya");
+		user.setPassword("123");
 		user.setAvatarUrl("");
 		userRepository.save(user);
 

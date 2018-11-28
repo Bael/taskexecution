@@ -39,6 +39,7 @@ dependencies {
 	apt 'org.projectlombok:lombok:1.18.4'
     runtime('com.h2database:h2')
 
+	implementation('org.springframework.boot:spring-boot-starter-security:2.0.5.RELEASE')
 	implementation('org.springframework.boot:spring-boot-starter-activemq')
 	implementation('org.springframework.boot:spring-boot-starter-aop')
 

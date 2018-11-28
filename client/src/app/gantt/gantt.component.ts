@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 
 import 'dhtmlx-gantt';
 import {} from '@types/dhtmlxgantt';
+// import {gantt} from '@types/dhtmlxgantt';
 import {TaskService} from '../task.service';
 import {LinkService} from '../link.service';
 import {Link} from '../link';
@@ -9,9 +10,11 @@ import {Task} from '../task';
 import {Project} from '../project';
 import {ActivatedRoute} from '@angular/router';
 import {ProjectService} from '../project.service';
+import {e} from '@angular/core/src/render3';
 
 @Component({
   selector: 'gantt',
+
   providers: [TaskService, LinkService],
   styles: [
       `
@@ -26,6 +29,9 @@ import {ProjectService} from '../project.service';
 })
 export class GanttComponent implements OnInit {
   @ViewChild('gantt_here') ganttContainer: ElementRef;
+
+
+
 
   project: Project;
 
@@ -43,6 +49,17 @@ export class GanttComponent implements OnInit {
 
   initData(project: Project) {
 
+
+    // this.taskService.getByProject(project.id)
+    //   .then(tasks =>
+    //     this.linkService.getByProject(project.id)
+    //       .then(links => {
+    //         console.log(tasks );
+    //
+    //         gantt.clearAll();
+    //         gantt.parse({tasks , links});
+    //         gantt.render();
+    //       }));
 
     Promise.all([this.taskService.getByProject(project.id),
       this.linkService.getByProject(project.id)])
@@ -66,7 +83,11 @@ export class GanttComponent implements OnInit {
       this.taskService.insert(task)
         .then((response) => {
           if (response.id !== id) {
-            gantt.changeTaskId(id, response.id);
+            try {
+              gantt.changeTaskId(id, response.id);
+            } catch (e) {
+              console.log(e);
+            }
           }
         });
     });

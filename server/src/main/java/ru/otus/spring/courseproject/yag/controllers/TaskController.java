@@ -51,7 +51,7 @@ public class TaskController {
         LocalDate startDate = LocalDate.parse(taskDTO.getStartDate().substring(0, 10));
         task.setStartDate(startDate);
         task.setProgress(taskDTO.getProgress());
-        if (taskDTO.getParent() != null && taskDTO.getParent() > 0)
+        if (taskDTO.getParent() > 0)
         {
             Task parent = taskRepository.findById(taskDTO.getParent()).orElseThrow(() -> new ObjectNotFoundException(taskDTO.getParent(),
                     "parent Task"));
@@ -73,7 +73,7 @@ public class TaskController {
         LocalDate startDate = LocalDate.parse(taskDTO.getStartDate().substring(0, 10));
         task.setStartDate(startDate);
         task.setProgress(taskDTO.getProgress());
-        if (taskDTO.getParent() != null && taskDTO.getParent() > 0)
+        if (taskDTO.getParent() > 0)
         {
             Task parent = taskRepository.findById(taskDTO.getParent()).orElseThrow(() -> new ObjectNotFoundException(taskDTO.getParent(),
                     "parent Task"));
