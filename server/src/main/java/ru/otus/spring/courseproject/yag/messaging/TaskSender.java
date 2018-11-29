@@ -42,14 +42,17 @@ public class TaskSender {
 
         List<Task> tasks = taskRepository.findByProject(project);
         tasks.forEach(task -> {
-            SyncTask stask = new SyncTask();
+            SyncTask syncTask = new SyncTask();
             if (board.isPresent()) {
-                stask.setBoardId(board.get().getId());
-            }
-            stask.setProjectTaskId(task.getId());
-            stask.setDescription(task.getDescription());
 
-            sendTask(destination, stask);
+                System.out.println("sync board id " + board.get().getId());
+
+                syncTask.setBoardId(board.get().getKanbanId());
+            }
+            syncTask.setProjectTaskId(task.getId());
+            syncTask.setDescription(task.getDescription());
+
+            sendTask(destination, syncTask);
         });
     }
 
