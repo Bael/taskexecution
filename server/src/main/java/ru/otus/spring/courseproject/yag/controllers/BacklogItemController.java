@@ -80,13 +80,17 @@ public class BacklogItemController {
         p.setName(item.getName());
         p.setStatus(ProjectStatus.CREATED);
         projectRepository.save(p);
+        LocalDate startDate = LocalDate.now(ZoneId.of("UTC"));
+        int count = 1;
 
         for (String option : itemDTO.getOptions()) {
+
             Task t = new Task();
             t.setDescription(option);
             t.setProject(p);
             t.setDuration(1);
-            t.setStartDate(LocalDate.now(ZoneId.of("UTC")));
+            // we begin it tomorrow ...
+            t.setStartDate(startDate.plusDays(count++));
             taskRepository.save(t);
 
         }

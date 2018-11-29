@@ -33,6 +33,7 @@ import { BacklogItemListComponent } from './backlog-item-list/backlog-item-list.
 import { BacklogItemComponent } from './backlog-item/backlog-item.component';
 import { BacklogItemDialogComponent } from './backlog-item-dialog/backlog-item-dialog.component';
 import {BacklogItemService} from './backlog-item.service';
+import { UserComponent } from './user/user.component';
 
 const appRoutes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
   {path: 'projects', component: ProjectListComponent},
   {path: 'projects/:id', component: ProjectComponent},
   {path: 'users', component: UserListComponent},
+  {path: 'users/:id', component: UserComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
 
@@ -62,7 +64,8 @@ const appRoutes: Routes = [
     CreateUserDialogComponent,
     BacklogItemListComponent,
     BacklogItemComponent,
-    BacklogItemDialogComponent
+    BacklogItemDialogComponent,
+    UserComponent
   ],
   entryComponents: [CreateProjectDialogComponent, CreateUserDialogComponent, BacklogItemDialogComponent],
   imports: [

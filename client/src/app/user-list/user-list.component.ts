@@ -1,6 +1,6 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {Project} from '../project';
-import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTableDataSource} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatTable, MatTableDataSource} from '@angular/material';
 import {User} from '../user';
 import {UserService} from '../user.service';
 
@@ -11,9 +11,14 @@ import {UserService} from '../user.service';
 })
 export class UserListComponent implements OnInit {
 
+  @ViewChild(MatTable) table: MatTable<User>;
+
   users: User[] = [];
   displayedColumns = ['id', 'fio', 'login', 'edit'];
   dataSource = new MatTableDataSource();
+
+  constructor(private userService: UserService, public dialog: MatDialog) {
+  }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -21,10 +26,12 @@ export class UserListComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  constructor(private userService: UserService, public dialog: MatDialog) { }
-
   ngOnInit() {
-    this.userService.getUsers().then(value => this.users = value, reason => alert(reason));
+    this.userService.getUsers().then(value => {
+        this.users = value;
+        this.dataSource.data = this.users;
+      }, reason => alert(reason.toString())
+    );
   }
 
   onClickCreateNewUser() {
@@ -37,7 +44,13 @@ export class UserListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed with result ' + result);
       this.userService.createUser(result)
-        .then(user => this.users.push(user));
+        .then(user => {
+            this.users.push(user);
+            this.dataSource.data = this.users;
+            this.table.renderRows();
+          }
+        );
+
 
     });
 
@@ -54,7 +67,8 @@ export class CreateUserDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<CreateUserDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: User) {}
+    @Inject(MAT_DIALOG_DATA) public data: User) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

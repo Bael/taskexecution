@@ -15,13 +15,13 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/users")
+    @GetMapping("/api/users")
     public List<UserDTO> getUsers() {
         return userRepository.findAll().stream().map(UserDTO::fromUser).collect(Collectors.toList());
     }
 
 
-    @PostMapping("/users")
+    @PostMapping("/api/users")
     public UserDTO createUser(@RequestBody UserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin());
@@ -34,7 +34,7 @@ public class UserController {
 
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/api/users/{id}")
     public UserDTO updateUser(@PathVariable long id, @RequestBody UserDTO userDTO) {
         User user = userRepository.findById(id).orElseThrow(RuntimeException::new);
 
@@ -45,6 +45,13 @@ public class UserController {
 
         User savedUser = userRepository.save(user);
         return UserDTO.fromUser(savedUser);
+
+    }
+
+    @GetMapping("/api/users/{id}")
+    public UserDTO getUser(@PathVariable long id) {
+        User user = userRepository.findById(id).orElseThrow(RuntimeException::new);
+        return UserDTO.fromUser(user);
 
     }
 }

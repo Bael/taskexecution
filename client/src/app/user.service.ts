@@ -19,4 +19,8 @@ export class UserService {
   updateUser(user: User): Promise<User> {
     return this.httpService.put<User>(Settings.baseUrl + 'users/' + user.id, user).toPromise();
   }
+
+  getUser(id: string): Promise<User> {
+    return this.httpService.get<User>(Settings.baseUrl + 'users/' + id).toPromise();
+  }
 }

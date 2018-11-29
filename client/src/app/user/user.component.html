@@ -1,0 +1,21 @@
+<h2>User page:</h2>
+<mat-tab-group>
+  <mat-tab label="Main user info">
+
+    <p>User login: {{user.login}}</p>
+    <p>User fio:</p>
+    <mat-form-field>
+      <input matInput #userfio [value]="user.fio" >
+    </mat-form-field>
+    <button mat-raised-button  (click)="onSaveUserFio(userfio.value)">SAVE</button>
+  </mat-tab>
+  <mat-tab label="Change password">
+    <p>Change user password:</p>
+    <mat-form-field>
+      <input matInput type="password" #pass >
+
+    </mat-form-field>
+    <button mat-raised-button  (click)="onChangePassword(pass.value)">CHANGE</button>
+  </mat-tab>
+</mat-tab-group>
+

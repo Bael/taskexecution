@@ -1,8 +1,8 @@
 import {BacklogItem} from '../backlog-item';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BacklogItemService} from '../backlog-item.service';
 import {Project} from '../project';
-import {MatDialog, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatTable, MatTableDataSource} from '@angular/material';
 import {CreateProjectDialogComponent} from '../project-list/project-list.component';
 import {BacklogItemDialogComponent} from '../backlog-item-dialog/backlog-item-dialog.component';
 
@@ -12,6 +12,9 @@ import {BacklogItemDialogComponent} from '../backlog-item-dialog/backlog-item-di
   styleUrls: ['./backlog-item-list.component.css']
 })
 export class BacklogItemListComponent implements OnInit {
+
+  @ViewChild(MatTable) table: MatTable<BacklogItem>;
+
 
   list: BacklogItem[] = [];
   displayedColumns = ['id', 'name', 'priority', 'edit'];
@@ -45,7 +48,8 @@ export class BacklogItemListComponent implements OnInit {
       this.backlogItemService.createItem(result)
         .then(item => {
           this.list.push(item);
-          // this.getItems();
+          this.dataSource.data = this.list;
+          this.table.renderRows();
         } );
 
     });
