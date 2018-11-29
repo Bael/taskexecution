@@ -1,6 +1,5 @@
+<h2>Boards journal</h2>
 
-<h2>Backlog items journal</h2>
-<button mat-raised-button (click)="onClickCreateNewItem()">Create new item..</button>
 <div class="example-container mat-elevation-z8">
   <div class="example-header">
     <mat-form-field>
@@ -23,16 +22,19 @@
     </ng-container>
 
     <!-- Priority Column -->
-    <ng-container matColumnDef="priority">
-      <mat-header-cell *matHeaderCellDef> Status</mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.priority}}</mat-cell>
+    <ng-container matColumnDef="projectname">
+      <mat-header-cell *matHeaderCellDef> projectname</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.projectName}}</mat-cell>
     </ng-container>
 
 
     <!-- goto to card Column -->
     <ng-container matColumnDef="edit">
       <mat-header-cell *matHeaderCellDef>edit</mat-header-cell>
-      <mat-cell *matCellDef="let element"><a href="#" [routerLink]="['/backlog', element.id]" >Open card</a></mat-cell>
+      <mat-cell *matCellDef="let element">
+        <!--<a href="#" [routerLink]="['/backlog', element.id]" >Open card</a>-->
+        <button mat-raised-button (click)="onClickSetProject(element)">Set project</button>
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

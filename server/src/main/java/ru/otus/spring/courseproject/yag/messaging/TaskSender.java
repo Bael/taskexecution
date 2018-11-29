@@ -5,13 +5,17 @@ import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Component;
+import ru.otus.spring.courseproject.yag.data.BoardRepository;
 import ru.otus.spring.courseproject.yag.data.TaskRepository;
+import ru.otus.spring.courseproject.yag.domain.Board;
 import ru.otus.spring.courseproject.yag.domain.Project;
 import ru.otus.spring.courseproject.yag.domain.Task;
 import ru.otus.spring.courseproject.yag.dto.TaskDTO;
+import ru.otus.spring.dto.SyncTask;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class TaskSender {
@@ -27,14 +31,29 @@ public class TaskSender {
 
     private final JmsTemplate jmsTemplate;
 
+    @Autowired
+    BoardRepository boardRepository;
+
     public void sendTasks(String destination, Project project) {
         Objects.requireNonNull(project);
 
+        long boardId = 0;
+        Optional<Board> board = boardRepository.findByProject(project);
+
         List<Task> tasks = taskRepository.findByProject(project);
-        tasks.forEach(task -> sendTask(destination, TaskDTO.fromTask(task)));
+        tasks.forEach(task -> {
+            SyncTask stask = new SyncTask();
+            if (board.isPresent()) {
+                stask.setBoardId(board.get().getId());
+            }
+            stask.setProjectTaskId(task.getId());
+            stask.setDescription(task.getDescription());
+
+            sendTask(destination, stask);
+        });
     }
 
-    public void sendTask(String destination, TaskDTO task){
+    public void sendTask(String destination, SyncTask task){
             this.jmsTemplate.convertAndSend(destination, task);
     }
 

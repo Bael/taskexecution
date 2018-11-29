@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Create new backlog item:</h1>
+<div mat-dialog-content >
+  <p>Item name:{{data.name}} </p>
+  <p>Project name:{{data.projectName}} </p>
+
+  <p>Select project:</p>
+  <mat-form-field>
+
+    <mat-select placeholder="Choose project" [(ngModel)]="selectedProject"  name="project" >
+      <mat-option *ngFor="let project of projects" [value]="project.id">
+        {{ project.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Create</button>
+</div>

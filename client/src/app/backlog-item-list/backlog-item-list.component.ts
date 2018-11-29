@@ -44,7 +44,7 @@ export class BacklogItemListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed with result ' + result);
+      console.log('The dialog was closed with result ' + JSON.stringify(result));
       this.backlogItemService.createItem(result)
         .then(item => {
           this.list.push(item);
